@@ -1,7 +1,5 @@
 <?php
-define("DBNAME","edsa_app");
-define("DBUSER","root");
-define("DBPASS","");
+include 'db.php';
 
 try{
     $conn = new PDO("mysql:host=localhost;dbname=".DBNAME,DBUSER,DBPASS);
