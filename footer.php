@@ -172,7 +172,7 @@
           <!-- End Col -->
   
           <div class="col-md-auto">
-            <p class="fs-5 text-white-70 mb-0">© ekiti learning hub. 2021</p>
+            <p class="fs-5 text-white-70 mb-0">© ekiti learning hub. 2023</p>
           </div>
           <!-- End Col -->
         </div>

@@ -1,71 +1,62 @@
 <?php
 include 'db.php';
 
-try{
-    $conn = new PDO("mysql:host=localhost;dbname=".DBNAME,DBUSER,DBPASS);
-
-    $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-}catch(PDOException $e){
+try {
+    $conn = new PDO("mysql:host=" . DBHOST . ";dbname=" . DBNAME, DBUSER, DBPASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
     echo $e->getMessage();
 }
 
+if (isset($_POST['submit'])) {
+    $error = array();
 
-
-if(isset($_POST['submit'])){
-    $error= array();
-
-    if(empty($_POST['fullname'])){
-        $error [] ="Please enter your name";
-    }else{
-       $fullname = $_POST['fullname'];
-    }
-
-    if(empty($_POST['email'])){
-        $error [] ="Please enter your email";
-    }else{
-       $email = $_POST['email'];
-    }
-
-    if(empty($_POST['password'])){
-        $error [] ="Please enter password";
-    }else{
-       $password = $_POST['password'];
-    }
-
-    if(empty($_POST['fullname'])){
-        $error [] ="Please enter your name";
-    }else{
+    if (empty($_POST['fullname'])) {
+        $error[] = "Please enter your name";
+    } else {
         $fullname = $_POST['fullname'];
-     }
+    }
 
-    if(empty($_POST['confirm_password'])){
-        $error [] = "Password does not match the confirm password.";
+    if (empty($_POST['email'])) {
+        $error[] = "Please enter your email";
+    } else {
+        $email = $_POST['email'];
+    }
 
-    }elseif($_POST['confirm_password'] !== $_POST['password']){
+    if (empty($_POST['password'])) {
+        $error[] = "Please enter password";
+    } else {
+        $password = $_POST['password'];
+    }
+
+    if (empty($_POST['confirm_password'])) {
+        $error[] = "Password does not match the confirm password.";
+    } elseif ($_POST['confirm_password'] !== $_POST['password']) {
         $error[] = "Password mismatched";
-    }else{
+    } else {
         $confirm_password = $_POST['confirm_password'];
     }
 
-    if(empty($error)){
-        $encrypted = password_hash($password,PASSWORD_BCRYPT);
+    if (empty($error)) {
+        $encrypted = password_hash($password, PASSWORD_BCRYPT);
 
-        $statement = $conn->prepare("INSERT INTO users VALUES(NULL,:nm,:em,:ps,NOW(),NOW())") ;
-        $statement -> bindParam(":nm",$fullname);
-        $statement -> bindParam(":em",$email);
-        $statement -> bindParam(":ps",$encrypted);
+        $statement = $conn->prepare("INSERT INTO users VALUES(NULL, :nm, :em, :ps, NOW(), NOW())");
+        $statement->bindParam(":nm", $fullname);
+        $statement->bindParam(":em", $email);
+        $statement->bindParam(":ps", $encrypted);
 
         $statement->execute();
 
-        header("Location:page-login.php");
-    }else{
-        foreach($error as $key => $value){
-            echo $value."<br>";
+        header("Location: page-login.php");
+        exit(); // Make sure to exit after redirection
+    } else {
+        foreach ($error as $key => $value) {
+            echo $value . "<br>";
         }
     }
-
 }
 ?>
+
 
 
 

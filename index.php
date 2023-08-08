@@ -201,7 +201,7 @@
         <div class="col-lg-5">
           <div class="mb-5">
             <h2>We tackle the challenges start-ups face</h2>
-            <p>Besides teaching the start-up from the basics as a student of Ekiti Learning Hub, we have built a special tools for common pain points that wthey might have encountered in various schools.</p>
+            <p>Besides teaching the start-up from the basics as a student of Ekiti Learning Hub, we have built a special tools for common pain points that they might have encountered in various schools.</p>
           </div>
 
           <!-- List Checked -->

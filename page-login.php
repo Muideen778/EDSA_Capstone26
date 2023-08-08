@@ -73,7 +73,7 @@ if(isset($_POST['submit'])){
           header("Location:home.php");
 
         }else{
-          header("location:page-login.php?error=Either email or password incorrect");
+          header("location:page-login.php?error=Invalid enail or password.");
         }
 
 

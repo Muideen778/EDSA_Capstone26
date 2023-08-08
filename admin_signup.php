@@ -1,59 +1,64 @@
 <?php
-include 'db.php';
+define("DBHOST", "https://databases.000webhost.com/"); 
+define("DBNAME", "edsa_app");
+define("DBUSER", "id21119725_muideenalimi48");
+define("DBPASS", "#MuideenAlimi1");
 
-if(isset($_POST['submit'])){
-    $error= array();
-
-    if(empty($_POST['fullname'])){
-        $error [] ="Please enter your name";
-    }
-
-    if(empty($_POST['fullname'])){
-        $error [] ="Please enter your name";
-    }
-
-    if(empty($_POST['email'])){
-      $error [] ="Please enter your email";
-  }
-
-    if(empty($_POST['username'])){
-        $error [] ="Please enter your username";
-    }
-
-    if(empty($_POST['hash'])){
-        $error [] ="Please enter password";
-    }
-
-    if(empty($_POST['confirm'])){
-        $error [] = "Password does not match the confirm password.";
-    }elseif($_POST['confirm'] !== $_POST['hash']){
-        $error[] = "Password mismatched";
-    }else{
-        $confirm = $_POST['confirm'];
-    }
-
-    if(empty($error)){
-
-        $hash = password_hash($_POST['hash'],PASSWORD_BCRYPT);
-
-        $stmt = $conn->prepare("INSERT INTO admin (email,hash,admin_name,time_created,admin_username,date_created) VALUES(:em,:hsh,:fn,NOW(),:us,NOW())");
-        $stmt -> bindParam(":fn",$_POST['fullname']);
-        $stmt -> bindParam(":us",$_POST['username']);
-        $stmt -> bindParam(":hsh",$hash);
-        $stmt -> bindParam(":em",$_POST['email']);
-
-        $stmt->execute();
-
-        header("Location:admin_login.php?message=Dear ".$_POST['username']. ", your account have been created successfully.");
-    }else{
-        foreach($error as $err){
-            echo $err;
-        }
-    }
-
+try {
+    $conn = new PDO("mysql:host=" . DBHOST . ";dbname=" . DBNAME, DBUSER, DBPASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch (PDOException $e) {
+  echo "Database Connection Error: " . $e->getMessage();
 }
 
+    if (isset($_POST['submit'])) {
+        $error = array();
+
+        if (empty($_POST['fullname'])) {
+            $error[] = "Please enter your name";
+        }
+
+        if (empty($_POST['email'])) {
+            $error[] = "Please enter your email";
+        }
+
+        if (empty($_POST['username'])) {
+            $error[] = "Please enter your username";
+        }
+
+        if (empty($_POST['hash'])) {
+            $error[] = "Please enter password";
+        }
+
+        if (empty($_POST['confirm'])) {
+            $error[] = "Please confirm your password";
+        } elseif ($_POST['confirm'] !== $_POST['hash']) {
+            $error[] = "Password mismatched";
+        } else {
+            $confirm = $_POST['confirm'];
+        }
+
+        if (empty($error)) {
+            $hash = password_hash($_POST['hash'], PASSWORD_BCRYPT);
+
+            $stmt = $conn->prepare("INSERT INTO admin (email, hash, admin_name, time_created, admin_username, date_created) VALUES (:em, :hsh, :fn, NOW(), :us, NOW())");
+            $stmt->bindParam(":fn", $_POST['fullname']);
+            $stmt->bindParam(":us", $_POST['username']);
+            $stmt->bindParam(":hsh", $hash);
+            $stmt->bindParam(":em", $_POST['email']);
+
+            $stmt->execute();
+
+            header("Location: admin_login.php?message=Dear " . $_POST['username'] . ", your account has been created successfully.");
+            exit(); // Make sure to exit after redirection
+        } else {
+            foreach ($error as $err) {
+                echo $err . "<br>";
+            }
+        }
+  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

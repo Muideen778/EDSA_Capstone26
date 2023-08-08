@@ -39,7 +39,7 @@
 
               <!-- Pages -->
               <li class="hs-has-mega-menu nav-item">
-                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-about.php" role="button" aria-expanded="false">About</a>
+                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-login.php" role="button" aria-expanded="false">About</a>
 
                 
                 <!-- End Mega Menu -->
@@ -48,7 +48,7 @@
 
               <!-- Pages -->
               <li class="hs-has-mega-menu nav-item">
-                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-contacts.php" role="button" aria-expanded="false">Contact</a>
+                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-login.php" role="button" aria-expanded="false">Contact</a>
 
                 
                 <!-- End Mega Menu -->
@@ -57,7 +57,7 @@
 
               <!-- Pages -->
               <li class="hs-has-mega-menu nav-item">
-                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-pricing.php" role="button" aria-expanded="false">Services</a>
+                <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link" href="page-login.php" role="button" aria-expanded="false">Services</a>
 
                 
                 <!-- End Mega Menu -->
