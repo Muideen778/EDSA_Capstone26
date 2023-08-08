@@ -31,7 +31,7 @@
                       "maxWidth": "40rem"
                     }
                   }'>
-                <a id="landingsMegaMenu" class="hs-mega-menu-invoker nav-link" aria-current="page" href="index.php" role="button" aria-expanded="false">Home</a>
+                <a id="landingsMegaMenu" class="hs-mega-menu-invoker nav-link" aria-current="page" href="page-login.php" role="button" aria-expanded="false">Home</a>
 
                 <!-- End Mega Menu -->
               </li>
